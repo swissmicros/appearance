@@ -2,6 +2,6 @@ author:
   name: SwissMicros
   email: michael@swissmicros.com
 
-# include:
-#   "_layouts"
-#   "_includes"
+include:
+ - "_layouts"
+ - "_includes"
