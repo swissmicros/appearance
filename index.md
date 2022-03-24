@@ -8,3 +8,4 @@ descriptions:
   - name: "favicon.gif"
     text: "<span style='color: red'>favicon appears in the browser tab</span>"
 ---
+
