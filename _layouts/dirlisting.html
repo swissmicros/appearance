@@ -7,7 +7,7 @@ layout: docu
     <div id="toctitle">Public Repositories</div>
     <ul class="sectlevel1">
       <li><a href="{{ site.baseurl }}/User-Manuals">User-Manuals</a></li>
-      {% for repository in site.github.repositories %}
+      {% for repository in site.github.public_repositories %}
       <li><a href="{{ site.baseurl }}/{{ repository.name }}"> {{ repository.name | replace: '-', ' ' | replace: '_', ' ' }}</a></li>
       {% endfor %}
     </ul> 
