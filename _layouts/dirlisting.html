@@ -13,7 +13,7 @@ layout: docu
   <div id="toc" class="toc2">
     <div id="toctitle">Public Repositories</div>
     <ul class="sectlevel1">
-      <li><a href="{{ base_url }}/User-Manuals">User-Manuals</a></li>
+      <li><a href="{{ base_url }}User-Manuals">User-Manuals</a></li>
       {% for repository in site.github.public_repositories %}
       <li><a href="{{ base_url }}{{ repository.name | remove_first: '/' }}"> {{ repository.name | replace: '-', ' ' | replace: '_', ' ' }}</a></li>
       {% endfor %}
@@ -27,11 +27,11 @@ layout: docu
   {{ content }}
 </div>
 
-abs_url = {{ abs_url }}<br/>
-rel_url = {{ rel_url }}<br/>
-base_url = {{ base_url }}<br/>
-depth = {{ depth }} <br/>
-pwd = {{ pwd }} <br/>
+<!-- abs_url = {{ abs_url }}<br/> -->
+<!-- rel_url = {{ rel_url }}<br/> -->
+<!-- base_url = {{ base_url }}<br/> -->
+<!-- depth = {{ depth }} <br/> -->
+<!-- pwd = {{ pwd }} <br/> -->
 
 {% capture folders_list %}
   {% for file in site.static_files %}
