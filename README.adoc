@@ -16,4 +16,8 @@ Copyright © 2016 – {localyear} • v{version} • {docdate}
 
 == About this Repository
 
-This repository defines the appearance of the SwissMicros GitHub Pages.
+Use the repository as a submodule in any SwissMicros repositories:
+
+```bash
+git submodule add https://github.com/swissmicros/appearance.git 
+```
