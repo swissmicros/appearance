@@ -1,0 +1,267 @@
+:allow-uri-read:
+:stylesheet: https://tech.swissmicros.com/User-Manuals/usermanuals.css
+:linkcss:
+:toc: left
+:toclevels: 3
+:lang: en
+
+:version: 0.1
+
+:title-page: DM42 Testing
+= DM42 Testing
+SwissMicros GmbH
+Copyright © 2016 – {localyear} • v{version} • {docdate}
+
+== Test recipes
+
+=== Complex test - Running PLOT
+
+==== Preparation
+ - Reset calc while holding [-] key
+ - About screen should appear
+ - Press [EXIT] and calc screen with 'Memory Clear' should appear
+ - Activate USB mode: [SHIFT][SETUP][1][4]
+ - Mount DM42 disk on PC and delete everything from FAT
+ - Eject DM42
+ - Deactivate USB: [EXIT]
+ - Switch back to calc mode: several times [EXIT]
+ - Save clean calc state: [SHIFT][SETUP][1][3]
+
+==== ON/OFF
+ - Turn OFF [SHIFT][EXIT]
+ - (!) Sleep screen should appear
+ - Turn ON [SHIFT][EXIT]
+ - Calc mode screen should appear and everything should be repainted well (without any artifacts)
+
+==== Set Date/Time
+ - Set date/time in setup menu [SHIFT][SETUP][2] then [1] or [2]
+ - Try all function buttons inc/dec hour, minute, reset sec, etc.
+ - The same for date
+ - Return back to calc mode - several times [EXIT]
+
+==== Test Date/Time over reset + consumption tests
+ - (A) Look at header line and remember Date/Time
+ - Hw reset the calc
+ - About screen should appear
+ - (Current) Check current consumption
+  ** Should be ~ 10uA or less
+  ** Press various keys - no spike on current should appear as no key should wake-up the cpu
+ - Turn calc on [EXIT]
+  ** (Current) When running on battery 1sec spikes on current should appear with peaks ~6mA when waiting for keys
+ - Check date time in header line and compare to (A) - Date/Time should be preserved after reset
+
+==== Automatic +PROGRAMS+ directory creation
+ - Jump to load programs dialog [SHIFT][SETUP][1][1]
+ - Empty screen should apper
+ - Switch to USB mode [EXIT][4]
+ - Mount DM42 disk at PC
+ - (!) +PROGRAMS+ directory should be there (in Preparation step was all from disk removed)
+ - Copy http://djed.cz/dm/raw/dplot_thomas.raw to +PROGRAMS+ directory
+ - Eject DM42
+ - Deactivate USB: [EXIT]
+ - Switch back to calc mode [EXIT][EXIT]
+
+==== Import +DPLOT+ program and write +FF+ function for plot
+ - Import +DPLOT+ program [SHIFT][SETUP][1][1][ENTER]
+ - Info about successful import should briefly appear
+ - Back to calc mode - few times [EXIT]
+ - Write +FF+:
+  ** To prgm mode [SHIFT][R/S|PRGM]
+  ** Start new program [GTO][.][.]
+  ** Code +FF+ program:
+   *** [SHIFT][3|PGM.FCN] [F1|LBL] [XEQ|F][XEQ|F] [ENTER] [SIN]
+  ** Back to calc mode [SHIFT][R/S|PRGM]
+
+==== Calculations
+ - Press [SHIFT] several times - check that shift annunciator is displayed correctly
+ - Switch number format [SHIFT][E|DISP][F1|FIX][2][2]
+ - Make some calculations ... push numbers on the stack ... check results
+ - Be sure your calculations involve irrationals e.g. sqrt(5) ... to check thoroughly qspi contents
+ - Press and hold number and check autorepeat
+ - Press and hold [<-] check autorepeat - the last digit doesn't disappear immediately - it is 'feature' of +Free42+
+ - Press [SQRT] briefly - nothing should appear on Y line
+ - Press and hold [SQRT] - after fraction of second SQRT text should appear on Y line then NULL after ~3s
+
+==== Second line of keys
+ - Turn on some menu e.g. [SHIFT][CATALOG]
+ - Do some calculation with second line keys [5][SQRT]
+ - (!) Key function should be launched - not the [Fn] key action
+
+==== Menu navigation
+ - Activate setup menu [SHIFT][SETUP]
+ - Navigate through menu using numbers or [UP]/[DOWN] and [ENTER]/[EXIT]
+ - (!) [EXIT] should jump just one level up
+ - Check repaints look for repaint articacts
+
+==== Run +DPLOT+ program
+ - Launch +DPLOT+ program [XEQ][F2|DPLOT]
+ - Enter parameters:
+  ** [1][+/-][YMIN]
+  ** [1][YMAX]
+  ** [0][AXIS]
+  ** [0][XMIN]
+  ** [8][0][0][XMAX]
+ - Proceed [R/S]
+ - Enter Function name and proceed [XEQ|F][XEQ|F][R/S]
+ - (!) Sinusoid should appear with little over 2 periods
+
+==== Save calc state
+ - Run save calc state [SHIFT][SETUP][1][3]
+ - (!) State should be saved and original display with sinusoid should appear
+ - Reset the calc
+ - About screen should appear, press [EXIT]
+ - (!) Original display with sinusoid should appear
+
+==== Endless loop test
+ - Write endless +RR+ program:
+  ** To prgm mode [SHIFT][R/S|PRGM]
+  ** Start new program [GTO][.][.]
+  ** Code +RR+ program:
+   *** [SHIFT][3|PGM.FCN][F1|LBL] [9|R][9|R] [ENTER] [GTO] [F1|RR]
+  ** Back to calc mode [SHIFT][R/S|PRGM]
+ - Run endless loop [R/S]
+ - (((*))) annunciator should appear
+ - and flying triangle should march through display at rate ~3s per line
+ - Try plug/unplug USB to see whether it runs at same pace
+ - (Current) Consumption on battery during run should be ~6mA
+ - Stop program [R/S]
+ - Run save calc state [SHIFT][SETUP][1][3]
+ - (!) State should be saved and original display should appear
+
+
+==== Program save
+ - Start save dialog [SHIFT][SETUP][1][2]
+ - Select 'FF' program and press [ENTER]
+ - Enter program name [XEQ|f][XEQ|f]
+ - Save [ENTER]
+ - Info about successful export should briefly appear
+ - Switch to USB mode [4]
+ - Mount DM42 disk at PC
+ - (!) +PROGRAMS/ff.raw+ should be there
+ - Eject DM42
+ - Deactivate USB: [EXIT]
+ - Switch back to calc mode [EXIT][EXIT]
+
+==== Check USB switching
+ - Switch to diag screen [SHIFT][SETUP][3][2][4]
+ - Plug/Unplug USB ... system frequency should change from 24MHz to 80MHz and back
+ - Back to calc mode: several times [EXIT]
+ - Check header line and Plug/Unplug USB - Voltage and USB/BAT should follow it
+
+==== Beep
+ - Run BEEP command [SHIFT][+|CATALOG][F1|FCN][DOWN][DOWN][DOWN][DOWN][F5|BEEP]
+ - You should hear four tones
+ - Try it in both BAT/USB modes whether it sounds same
+ - Mute BEEP [SHIFT][SETUP][2][3][EXIT][EXIT]
+ - Run BEEP command [SHIFT][+|CATALOG][F1|FCN][DOWN][DOWN][DOWN][DOWN][F5|BEEP]
+ - You should hear plain nothing
+ - Un-mute BEEP [SHIFT][SETUP][2][3][EXIT][EXIT]
+ - Run BEEP command [SHIFT][+|CATALOG][F1|FCN][DOWN][DOWN][DOWN][DOWN][F5|BEEP]
+ - You should hear four tones again
+
+==== Auto OFF test
+ - Enter some menu screen e.g. diag menu [SHIFT][SETUP][3][2][3]
+ - Wait few minutes - it should automatically jump to calc mode
+ - wait another few minutes - it should turn off
+
+==== Bootloader entered correctly
+ - Enter bootloader [SHIFT][SETUP][3][2][1]
+ - Bootloader screen should appear
+ - Connect USB to PC
+ - Try using +dm_tool+ or look at syslog whether the calc is in bootloader mode
+ - Back to calc mode - press reset and [EXIT]
+
+
+
+== Tests areas
+
+=== USB
+
+==== VBUS Detection - Clock switch
+
+- check in Diag dialog - menu - 3 - 2 - 3
+
+==== USB MSC works
+
+- USB/BAT indication in header OK
+
+- Activate USB mode in menu - 1 - 4
+- Connect to PC
+
+- Mount device (if not mounted automatically)
+- Edit/Copy files
+
+
+
+
+=== Date/Time
+==== Set date
+==== Set time
+==== Date/Time setting should survive reset
+
+
+=== Power voltage
+==== Power voltage is correctly displayed in header
+
+
+=== Beep
+==== BEEP command OK for both USB/BAT
+==== Beep mute - switch in settings menu
+==== Beep mute - default after reset is off
+==== Beep mute saved along calc state
+
+
+=== Consumption
+==== No wakeup on any key in off mode but EXIT
+==== ~10uA in about screen after RESET
+==== ~10uA in power OFF mode
+==== ~30uA in wait-for-key mode
+==== ~6mA on battery
+
+
+=== Program Load/Save
+.
+
+
+=== Basic calculations
+==== Autorepeat rate in both BAT/USB modes
+==== Top line works as F1-F6 keys
+==== Second line acts as normal keys if soft menu displayed
+==== Annunciator on shift press
+
+
+=== Menu system
+==== Menu navigates by keys
+==== Menu exits one level up by pressing EXIT key
+
+
+=== Display repaints
+==== Image is correctly displayed in OFF mode
+==== Display is repainted correctly after exit from SETUP
+==== Display is repainted correctly after ON
+
+
+=== Program Run
+==== Correct annunciator is displayed during program run
+==== Running triangle runs at correct rate in both BAT/USB modes
+
+
+
+=== Calc state save
+==== Issue the save state
+
+- From menu - 1 - 3
+- The state is loaded back immediately after save - so it is good check whether it really works
+
+
+=== Bootloader
+==== Bootloader is correctly entered from menu
+
+
+
+
+=== Auto OFF
+==== Auto off from calc mode
+==== Auto off from menu
+
+

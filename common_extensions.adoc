@@ -1,0 +1,51 @@
+[[lcd_screenshots]]
+=== LCD Screenshots
+
+Hold btn:[SHIFT] and press btn:[DISP] to get a screenshot.
+
+You will find a `.bmp` file named according to the current time and date in the `/SCREENS` folder of the FAT drive.
+
+
+
+[[off_images]]
+=== OFF Images
+
+The LCD display used in {platform} calculator behaves in similar way as e-ink displays and contents of the LCD is visible
+for a long time after the calculator is turned OFF.
+
+This feature is used to display images when the calculator is turned OFF.
+
+Single hard-coded OFF image is present in calculator firmware and this image is displayed whenever the calculator is turned OFF and FAT disk doesn't contain any valid custom image or the FAT disk is in error state.
+
+Custom OFF images should be stored in `/OFFIMG/` directory. All valid images are then cyclically displayed one after
+each calculator OFF in the order how they appear in `/OFFIMG/` directory.
+
+OFF images require specific image format. It has to be `.bmp` file with dimensions 400 x 240 and 1 bit depth.
+
+Examples of OFF images can be found on http://technical.swissmicros.com/{webdir}/fat/OFFIMG/["A collection of off-screen images"] page.
+
+
+[[rtc_correction]]
+=== RTC correction
+
+Note that to apply RTC correction you have to know (measure and calculate) ppm drift of calculator clock first.
+
+Use following steps to apply clock frequency correction.
+
+1. Calculate correction factor C which best matches required ppm correction P
++
+C = 2^20 P /(10^6 + P)
++
+resulting value C has to be integer and -511 \<= C \<= 512.
+
+2. Create file `/rtccalib.cfg` in root directory of calculator FAT disk and write value C there.
+
+3. Once the RTC correction is active the ppm value is written in Setting menu at the end of "Set Time >" line.
+
+
+It is possible to use approximate expressions between correction factor C and ppm value P (with reasonable precision):
+
+C = 1.04858 P
+
+P = 0.953674 C
+

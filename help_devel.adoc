@@ -1,0 +1,342 @@
+:allow-uri-read:
+:stylesheet: https://tech.swissmicros.com/User-Manuals/usermanuals.css
+:linkcss:
+:toc: left
+:toclevels: 5
+:lang: en
+
+:version: 0.1
+
+:title-page: DMCP Help Development
+= DMCP Help Development
+SwissMicros GmbH
+Copyright 2019-{localyear} v{version} {docdate}
+
+
+== DMCP Help Development
+
+[[Home]]
+=== Contents
+
+* link:#helpnav[Help Navigation]
+* link:#about_help[About Help Browser]
+* link:#help_chars[Special characters available]
+* link:#Example[Example Documentation]
+
+ +
+ +
+
+[[helpnav]]
+=== Help Navigation
+
+==== Global navigation
+
+Use [.button]#F1# or [.button]#F6# to exit +
+Use [.button]#F2# to jump to element with id='Home' or to beginning of
+the file if it doesn't exist +
+Use [.button]#F3# to open help file from disk +
+
+==== Navigation keys
+
+Press [.button]#+# to move one line forward +
+Press [.button]#-# to move one line backward +
+Press [.button]#×# to move one page forward +
+Press [.button]#÷# to move one page backward +
+Use arrow keys to navigate to next/previous link +
+[.button]#ENTER# to follow link +
+[.button]#←# to go back to place where was [.button]#ENTER# used. +
+Arrow keys just jump to the next page if there is no link to navigate
+to.
+
+==== Numpad-like navigation keys
+
+[.button]#2#/[.button]#8# - single line down/up +
+[.button]#3#/[.button]#9# - page down/up +
+[.button]#4#/[.button]#6# - prev/next link (same as arrows) +
+[.button]#5# - follow the link (same as [.button]#ENTER#) +
+[.button]#7# - 'Home' - same as [.button]#F2# - see above +
+ +
+
+[[about_help]]
+=== About Help Browser
+
+The DMCP system supports extremely lightweight implementation of HTML
+which covers just small fraction of the format. Almost all supported
+formatting is used in this help file. +
+If you want to write your own help file it is strongly recommended to
+take this help file as starting point and follow the structure of the
+HTML. Then check the appearance in calculator browser, whether it looks
+as expected. +
+ +
+See "link:#help_chars[Special characters available]" for list of
+supported characters in help file. +
+ +
+
+[[help_chars]]
+=== Special characters available
+
+This list of special characters supported in help files. +
+link:#html_seq[HTML &xxx; sequences] +
+link:#unichars[Unicode characters]
+
+* link:#uc_letters[Letters]
+* link:#uc_letters[Letters]
+* link:#uc_ligatures[Ligatures]
+* link:#uc_greek[Greek]
+* link:#uc_punct[Punctuation marks]
+* link:#uc_arrows[Arrows]
+* link:#uc_symbols[Symbols]
+* link:#uc_graph[Graphics]
+
+ +
+
+[[html_seq]]
+==== HTML &xxx; sequences
+
+[cols=",,",]
+|===
+|' ' | |as &nbsp;
+|& | |as &amp;
+|> | |as &gt;
+|< | |as &lt;
+|▼ | |as &#9660;
+|▲ | |as &#9650;
+|↓ | |as &darr;
+|↑ | |as &uarr;
+|← | |as &larr;
+|→ | |as &rarr;
+|∫ | |as &int;
+|± | |as &plusmn;
+|÷ | |as &divide;
+|× | |as &times;
+|Σ | |as &Sigma;
+|===
+
+ +
+ +
+
+[[unichars]]
+==== Unicode characters
+
+U+xxxx notation means Unicode character placed directly in help file. +
+ +
+
+[[uc_letters]]
+==== Letters
+
+[cols=",,",]
+|===
+|Ä | |U+00C4
+|Å | |U+00C5
+|Æ | |U+00C6
+|Ñ | |U+00D1
+|Ö | |U+00D6
+|Ü | |U+00DC
+|ᴇ | |U+1D07
+|===
+
+ +
+ +
+
+[[uc_ligatures]]
+==== Ligatures
+
+[cols=",,",]
+|===
+|ﬁ | |U+FB01
+|ﬂ | |U+FB02
+|===
+
+ +
+ +
+
+[[uc_greek]]
+==== Greek
+
+[cols=",,",]
+|===
+|Σ | |U+03A3
+|μ | |U+03BC
+|π | |U+03C0
+|Γ | |U+0393 (Transliterated)
+|θ | |U+03B8 (Transliterated)
+|===
+
+ +
+ +
+
+[[uc_punct]]
+==== Punctuation marks
+
+[cols=",,",]
+|===
+|— | |U+2014
+|’ | |U+2019
+|… | |U+2026
+|¿ | |U+00BF
+|===
+
+ +
+ +
+
+[[uc_arrows]]
+==== Arrows
+
+[cols=",,",]
+|===
+|← | |U+2190
+|↑ | |U+2191
+|→ | |U+2192
+|↓ | |U+2193
+|↲ | |U+21B2
+|===
+
+ +
+ +
+
+[[uc_symbols]]
+==== Symbols
+
+[cols=",,",]
+|===
+|° | |U+00B0
+|× | |U+00D7
+|÷ | |U+00F7
+|√ | |U+221A
+|∡ | |U+2220 or U+2221
+|∫ | |U+222B
+|≠ | |U+2260
+|≤ | |U+2264
+|≥ | |U+2265
+|␊ | |U+240A
+|␛ | |U+241B
+|£ | |U+00A3
+|===
+
+ +
+ +
+
+[[uc_graph]]
+==== Graphics
+
+[cols=",,",]
+|===
+|▒ | |U+2592
+|■ | |U+25A0
+|▶ | |U+25B6
+|▼ | |U+25BC
+|▲ | |U+25B2
+|◄ | |U+25C4
+|===
+
+ +
+ +
+
+[[Example]]
+=== Example Doc
+
+* link:#used_sym[Symbols used in this guide]
+* link:#Fx_buttons[Fx Buttons without menu]
+* link:#stack[Stack]
+* link:#regs[Registers]
+* link:#ang_modes[Angular Modes]
+* link:#num_fmts[Number Formats]
+* link:#impl_fns[Implemented Functions]
+
+ +
+ +
+
+[[used_sym]]
+=== Symbols used in this guide
+
+A [.lcd]#123# represents a soft button or anything on the LCD +
+A [.button]#STO# represents a physical button +
+ +
+
+=== Stack
+
+Stack consists of *10 registers*. All arithmetic operations use for
+arguments and results top level of the stack as is usual for RPN
+machines. +
+Stack registers could be also accessed using [.button]#RCL# and
+[.button]#STO# with negative indexes -1 to -9. +
+ +
+Example of stack display: +
+[.lcd]#6: 0 # +
+[.lcd]#5: 0 # +
+[.lcd]#4: 0 # +
+[.lcd]#3: 0 # +
+[.lcd]#2: 321232.123ᴇ-12 # +
+[.lcd]#1: 54.344234342 # +
+[.lcd]#0: 123.32 # +
+ +
+
+[[regs]]
+=== Registers
+
+Register area consist of *100 registers*. Registers could be accessed
+using [.button]#RCL# and [.button]#STO# with indexes 0 to 99. +
+ +
+
+[[Fx_buttons]]
+=== Fx Buttons without menu
+
+[cols=",,",]
+|===
+|F1 | |Displays this Help
+|F2 | |
+|F3 | |
+|F4 | |
+|F5 | |Decreases font size
+|F6 | |Increases font size
+|===
+
+ +
+ +
+
+[[ang_modes]]
+=== Angular Modes
+
+Pressing [.button]#MODES# button cycles through angular modes
+
+[cols=",",]
+|===
+|DEG |_Degrees_
+|RAD |_Radians_
+|GRAD |_Gradians_
+|===
+
+ +
+ +
+Current angular mode is displayed in status line. +
+ +
+
+[[num_fmts]]
+=== Number Formats
+
+Press [.button]#DISP# - selection menu appears
+
+[cols=",",]
+|===
+|None |No special format
+|FIX |Fixed decimal places (ARG)
+|SCI |Scientiﬁc notation (ARG)
+|ENG |Engineering notation (ARG)
+|===
+
+ +
+(ARG): Takes number of fractional digits (i.e. digits after decimal
+point) as argument from stack. +
+ +
+
+[[impl_fns]]
+==== Implemented functions
+
+[1/x], [√x], [LOG], [LN], +
+[x^2^], [y^x^], [10^x^], [e^x^], +
+[STO], [RCL], [R↓], [SIN], [COS], [TAN], +
+[%], [π], [ASIN], [ACOS], [ATAN], +
+ +
+ +
+ +
+ +

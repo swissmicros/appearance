@@ -1,0 +1,87 @@
+[[system_menu]]
+=== System menu
+
+==== Flash firmware from FAT
+
+Starts flashing of new firmware if the firmware file is stored in root directory of FAT disk.
+This is usually not necessary because calculator automatically
+detects presence of new firmware file and asks for update after end of USB disk mode.
+
+See <<firmware_update,Firmware update>> chapter for more information about firmware update.
+
+
+==== Bootloader
+
+Activates bootloader mode for firmware flashing.
+
+You can flash {platform} firmware once is the bootloader mode entered.
+See <<firmware_update,Firmware update>> chapter for more information about firmware update.
+
+Press the RESET button on the back of the calculator if you activate Bootloader mode accidentally.
+
+
+==== Program Info
+
+Displays information about currently loaded {pgmname}.
+This is mainly for diagnostics.
+
+
+==== Reset to DMCP menu
+
+Reboots calculator back to DMCP system menu.
+
+WARNING: All unsaved data is lost.
+ifeval::["{platform}" == "DM41X"]
+Save your DM41X state before proceeding to the DMCP menu, see <<save_state,Save DM41 State File>>.
+endif::[]
+
+==== Format FAT Disk >
+
+Format the internal FAT disk storage.
+
+WARNING: All data is erased from disk.
+
+ifeval::["{platform}" == "DM41X"]
+After formatting the FAT disk, all default folders described in section <<internal_fat_disk,Internal FAT disk>>
+will be automatically created.
+endif::[]
+
+
+==== FAT Disk Media Test >
+
+Checks whole flash disk FAT area for bad blocks. Disk is formatted starting from first good block after the check.
+
+WARNING: All data is erased from disk.
+
+
+==== Power OFF mode
+
+This item is purely for power OFF testing purposes to avoid time consuming switching between firmwares.
+It is in no way mentioned to be changed by users.
+
+- Mode 0 means no deep sleep for QSPI giving approx. 12uA sleep current.
+- Mode 1 corresponds to pre 3.9 DMCP behavior.
+- Mode 2 corresponds to DMCP 3.9 and newer versions.
+- Mode 3 is the latest update to mode 2 which should fix possible deficiencies of mode 2 by adding further pull-ups.
+
+Defaults:
+----
+hwid=0 : Mode 1
+hwid=1 : Mode 3
+----
+
+Note that the "Power OFF mode" value is preserved during calculator RESET, but is lost when battery is removed.
+
+==== Self Test
+
+Displays production test menu where tests of various parts of calculator could be run from.
+
+----
+Self Test menu
+1. KBD Test
+2. LCD Test
+3. IR Test
+4. BEEP Test
+5. Diagnostics
+----
+

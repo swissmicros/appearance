@@ -1,0 +1,1236 @@
+:allow-uri-read:
+:stylesheet: https://tech.swissmicros.com/User-Manuals/usermanuals.css
+:linkcss:
+:lang: en
+:toc: left
+:toclevels: 3
+:doctype: book
+:icons: font
+
+:version: 1.38
+
+
+:title-page: Voyager Series User Manual
+= Voyager Series User Manual
+SwissMicros GmbH
+Copyright © 2016–{localyear} • v{version} • {docdate}
+
+:sectnums:
+:sectnumlevels: 3
+:source-highlighter: coderay
+:imagesdir: img/voyager_user_manual
+
+// Our definitions
+:plus:  &#43;
+:gtlt:  &#8822;
+:minus: &#8722;
+:prod:  ⨯
+:div:   ÷
+:sqrt:  &#8730;
+
+:TODO:  pass:[<span style="padding:4px 2px 2px 2px;background:magenta; color:white;"><b>TODO:</b></span>]
+
+:connect_calc: Connect the calculator with a miniUSB cable to the computer.
+
+:install_win_driver: <<driver_win,Install Serial Port driver>>
+
+:check_MacOS_driver: Ensure the <<driver_MacOS,Serial Port driver>> is installed.
+
+:pkg_inst_other_lnx:  or run package installer according to the Linux distribution.
+
+:prepare_sercon: Establish a <<serial_connection,connection to the Serial Console>>
+
+:post_flash: After the flash procedure is done, press the reset button again and disconnect from the computer.
+
+:init_flash: Press the <<reset_button,reset button>> with a paperclip to initiate the flash process. + \
+ If the calculator beeps and displays `SERIAL CONSOLE`, reset again until the flash process begins.
+
+:enable_serial_console: Enable the Serial Console Mode on the calculator: btn:[ON] + btn:[C] +
+ see <<spec_keys,Special Key Combinations>> chapter for more details.
+
+:exit_console_mode: Pressing any button on the calculator ends the Serial Console Mode.
+
+:serial_console_activated: The Serial Connection is now established. +
+ The monitor window is blank when it starts. Press «?» for help.
+
+:open_serial_monitor: Click "Open" to start monitoring Serial Data.
+
+:title-page: Voyager Series User Manual
+
+
+
+== Family Members
+
+The Voyager Series of calculators were introduced by Hewlett-Packard in 1981. Each model provided different capabilities and was aimed at different user markets.
+
+The SwissMicros' Series of the Voyager calculators come in two sizes. See the <<illustrations,Illustrations section>> for a visual size comparison. The credit card sized models (e.g. DM15) and the original sized models (e.g. DM15L) contain the same electronics and use the same firmware.
+
+In this document, all models are referenced without trailing L.
+
+- DM10 — basic scientific calculator
+- DM11 — mid-range scientific calculator
+- DM12 — business/financial calculator
+- DM15 — advanced scientific calculator
+- DM16 — computer programmer's calculator
+- DM41 — a landscape orientated clone of the HP-41CX
+
+
+== SwissMicros improvements on the Voyager Series
+
+- They do not have all the bugs found in the HP-15C LE, see
+link:https://www.hpmuseum.org/cgi-sys/cgiwrap/hpmuseum/articles.cgi?read=1089[the bug list]!
+
+- They run up to 30 times faster (at 48MHz) than the calculators introduced in the 80s.
+
+- The USB connection features a command line interface for saving and restoring complete calculator states.
+
+- Save, edit and restore complete calculator states with one of SwissMicros' link:https://technical.swissmicros.com/decoders/[online utility].
+
+- Firmware update via USB is possible using the SwissMicros
+link:https://technical.swissmicros.com/voyager/firmware/Voyage_Firmware_Tool.zip[Firmware Update Tool] (on Windows)
+or standard `lpc21isp` utility on Linux and MacOS.
+
+- The reset button is located on the back in the lower left-hand side closest to the corner.
+
+- They are still being produced
+
+
+== References and Resources
+
+// - link:https://www.swissmicros.com/technical#docs-voyager[Technical resources for the SwissMicros Voyager Series] at Swissmicros.com
+
+- link:https://forum.swissmicros.com/viewforum.php?f=8&sid=6ebd53ee12e12ca6b0e317f2a866841c[SwissMicros forum for DM1x/DM41]
+
+- link:https://technical.swissmicros.com/decoders[Encode and decode utility (html with jscript)]
+  for <<save_restore,Save and Restore State>> function
+
+- Torsten Manz' excellent link:http://hp-15c.homepage.t-online.de/index.htm[HP-15C Simulator] supports data exchange with the DM15 under Windows, Linux and Mac OS X
+
+// - A link to access DMConnect (when ready)
+
+// Links to important/helpful sites/pages with programs and/or tips on Voyager Series in general  and/or DM1x specifics.
+
+
+
+== Battery Replacement
+
+[NOTE]
+====
+SwissMicros Voyager calculators are powered by a standard (non-rechargeable) CR2032 battery.
+
+The battery should last many years with normal use.
+
+Powering via USB is not supported.
+====
+
+- Turn calculator off; calculator data is preserved for about 30 seconds without battery
+
+- Unscrew all four back screws
+
+- Remove calculator's back
+
+- Replace the battery
+
+- Put it back together, don't tighten the screws too much
+
+
+
+
+
+== Firmware Update
+
+NOTE: It is not possible to break or brick the calculator with any update procedure.
+
+WARNING: All calculator data (i.e. programs, registers, etc.) will be lost. Make a <<save_restore,backup>> if needed.
+
+
+=== Selecting Firmware
+
+
+[[latest_firmware]]
+==== The Latest Firmware
+
+The latest firmware versions are available at https://technical.swissmicros.com/voyager/firmware/.
+
+Download files using the 'Target save as...' function.
+
+
+////
+NOTE: You can use any firmware with correct calculator model name. Each firmware handles
+all hardware variants of the particular model (i.e. both large and credit card size).
+
+NOTE: Each of SwissMicros Voyager models come in 2 sizes: large (e.g. DM15L)
+and credit card size (DM15). You can use firmware with the correct calculator model name on both
+large and credit card models.
+////
+
+
+==== Name Conventions
+
+The *basic firmware name* consist of two parts
+
+----
+<model>_<version>.hex
+
+Example: DM12_V31.hex
+----
+
+where
+
+<model>::    Calculator model. One of `DM10`, `DM11`, `D12`, `DM15`, `DM16`, `DM41`
+<version>::  Firmware version, e.g. `V31`.
+
+
+*Extended firmware name* adds name of the extension
+
+----
+<model>_<ext>_<version>.hex
+
+Example: DM15_M80_V31.hex
+----
+
+where `<model>` and `<version>` are the same as above and
+
+<ext>:: Name of the extension e.g. `M80`, `M1B`
+
+
+
+
+==== Special DM15 Firmware Versions
+
+There are two special firmware versions for the DM15, version `M80` and version `M1B`.
+Both contain the original ROM with modifications to support more memory.
+
+// We can lookup information about original HP-15C memory.
+According to the HP-15C Owner’s Handbook, Appendix C: Memory Allocation (pg. 214), the
+total allocatable memory is 64 registers and initial Memory Status is `19-46 0-0`.
+
+The following table summarizes how this limit is modified in extended DM15 ROMs.
+
+//,width="80%"
+[options="header",cols="2,^2,^2,^2"]
+|======================================================================================
+| ROM                 | Alocatable registers | RAM base addr. | Initial Memory Status
+| DM15 (Original ROM) |     64               |   0xc0         | `19-46 0-0`
+| DM15_M80            |    128               |   0x80         | `19-110 0-0`
+| DM15_M1B            |    229               |   0x1b         | `19-211 0-0`
+|======================================================================================
+
+The default distribution version on DM15 is `DM15_M1B` with 229 Registers to supply
+users with as much memory as possible. Please, keep in mind the original calculator
+ROM isn't designed to handle so much memory and there are known at least two marginal
+cases when the calculator can give confusing info or wrong result:
+
+[WARNING]
+====
+*Known problems*
+
+- The program step counter is only three digits wide. Programs
+  with more than 999 steps should not be created.
+
+- Solving lin.eq and matrix inversions is limited to matrices with sizes up to 8x8.
+  Unpredictable things may happen when operating with matrices larger than 8x8,
+  it may even completely block the calculator.
+  More info about this is available
+  in Appendix chapter <<extended_matrices,Matrices in Extended DM15>>.
+====
+
+To avoid potential problems, the firmware version `DM15_M80` can be used,
+where such effects should be less prominent, or even firmware version `DM15` with the original ROM code.
+
+
+=== Update on Windows
+
+==== Required software
+
+
+- {install_win_driver}
+
+- <<find_serport_win,Find Serial Port Number>>
+
+- Download and unpack the SwissMicros link:https://technical.swissmicros.com/voyager/firmware/Voyage_Firmware_Tool.zip[Voyage Firmware Tool] for updating the calculator.
+
+
+
+==== Update
+
+- {connect_calc}
+//  The calculator may be turned on or off before flashing
+
+- Start the link:https://technical.swissmicros.com/voyager/firmware/Voyage_Firmware_Tool.zip[Voyage Firmware Tool]
+
+- Press "Open File ..." and choose the <<latest_firmware,firmware file>>
+
+- Choose "Serial Port", see <<find_serport_win,find Serial Port Number>>
+
+- Press the "Program" button in the application.
+
+- {init_flash}
+
+- The flash progress is displayed in the application and takes about 10-20 seconds depending on
+  the firmware version.
+
+- {post_flash}
+
+
+
+
+=== Update on MacOS
+
+==== Required Software
+
+- {check_MacOS_driver}
+
+- <<find_serport_MacOS,Find Serial Port Name>>
+
+- Download and install MacPort (link:https://www.macports.org/[www.macports.org])
+
+- Open the Terminal application (Applications->Utilities->Terminal) and run the following commands:
++
+----
+sudo port selfupdate
+sudo port upgrade outdated
+sudo port install lpc21isp
+----
+
+- Close the Terminal application
+
+
+
+==== Firmware Update
+
+- Open the Terminal application (Applications->Utilities->Terminal)
+
+- {connect_calc}
+
+- <<find_serport_MacOS,Find USB Serial Port Name>>
+
+
+- Run command:
++
+----
+sudo lpc21isp -control -controlinv -hex <firmware_file> <serial_port> 115200 12000
+----
++
+replace `<firmware_file>` with the firmware file name +
+and `<serial_port>` with Serial Port Name found in previous step +
++
+Example:
++
+----
+sudo lpc21isp -control -controlinv -hex DM15_V31.hex /dev/tty.usbserial-0001 115200 12000
+----
+
+- {init_flash}
+
+- {post_flash}
+
+- Close the Terminal application
+
+
+=== Update on Linux
+
+==== Required Software
+
+- Install the `lpc21isp` tool for firmware update.
++
+On Debian based systems run
++
+----
+sudo apt-get install lpc21isp
+----
++
+{pkg_inst_other_lnx}
+
+
+
+
+==== Firmware Update
+
+
+- <<find_serport_linux,Find USB Serial Port Name>>
+
+- Start the flashing utility by
++
+----
+sudo lpc21isp <firmware_file> <serial_port> 115200 12000
+----
++
+replace `<firmware_file>` with the appropriate firmware filename
+and `<serial_port>` with Serial Port Name found in the previous step
++
+Example:
++
+----
+sudo lpc21isp DM15_V31.hex /dev/ttyUSB0 115200 12000
+----
+
+- Wait for message "Synchronizing (ESC to abort)". {init_flash}
+
+- {post_flash}
+
+
+
+
+
+[[serial_console]]
+== Serial Console
+
+// You can use link:https://technical.swissmicros.com/manuals/swissmicros_serial_guide_v1.63.pdf[
+// Serial Console Guide for Mac and Windows (PDF)]
+// for quick reference.
+
+Useful links:
+
+- link:https://technical.swissmicros.com/decoders[Encode and decode utility (html with jscript)]
+  for <<save_restore,Save and Restore State>> function
+
+- A great link:http://hp-15c.homepage.t-online.de/index.htm[HP-15C Simulator] by Torsten Manz for Windows,
+  Linux and Mac OS X supports data exchange with the DM15.
+
+
+
+[[serial_connection]]
+=== Connection to Serial Console
+
+- Prepare Serial Console program:
+ * <<console_windows,Console on Windows>>
+ * <<console_MacOS,Console on MacOS>>
+ * <<console_linux,Console on Linux>>
+
+- <<console_calc,Activate Serial Console on the calculator>>
+
+TIP: Remove the USB cable from the calculator if not needed.
+Residual currents of the CP2102 chip can cause shortening of the battery life when left connected
+for prolonged periods of time after the calculator is turned OFF. +
+To be completely sure any residual charges are removed, turn the calculator ON/OFF after the
+USB cable is removed.
+
+
+[[console_calc]]
+=== Enable Serial Console Mode
+
+Serial Console Mode is enabled by btn:[ON] + btn:[C],
+see <<spec_keys,Special Key Combinations>> chapter for more details.
+
+// {connect_calc}.
+
+
+
+
+=== Serial Port Drivers
+
+[[driver_win]]
+==== Windows
+
+Download and install Silicon Labs CP2102 USB Driver from
+link:https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers[Silicon Labs drivers page]/Downloads.
+
+[WARNING]
+====
+Windows users should NOT use the "Universal" Windows driver, use the  older Windows drivers instead, the newer type has installation issues on Windows 10.
+====
+
+[[driver_MacOS]]
+==== MacOS
+
+Driver is part of the system since "Big Sur".
+
+For earlier systems download and install the CP2102 Mac OSX driver from
+link:https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers[Silicon Labs drivers page]/Downloads.
+
+
+
+[[driver_linux]]
+==== Linux
+
+No action needed.
+
+The cp210x driver is part of the kernel build on all major Linux systems.
+
+
+
+
+=== Finding Serial Port
+
+[[find_serport_win]]
+==== Windows
+
+- {install_win_driver}
+- {connect_calc}
+- Open Device Manager and find the `Silicon Labs CP210x` line,
+- Note the name given to the USB Serial Port (here : `COM3`)
++
+image::dev_manager.jpg[]
+
+
+
+[[find_serport_MacOS]]
+==== MacOS
+
+- {check_MacOS_driver}
+
+- {connect_calc}
+
+- Find the name of the USB Serial Port
++
+----
+ls /dev/tty.usbserial*
+----
++
+  or with Silicon Labs drivers
++
+----
+ls /dev/tty.SLAB*
+----
++
+The port is usually `/dev/tty.usbserial-0001` or `/dev/tty.SLAB_USBtoUART` +
+If the port isn't present, check the USB connection to calculator.
+
+
+
+[[find_serport_linux]]
+==== Linux
+
+- {connect_calc}
+
+- In the console run:
++
+----
+dmesg
+----
++
+There should be a message near the end like
+`cp210x converter now attached to ttyUSB0`
++
+If so, the full path to the USB Serial Port is `/dev/ttyUSB0`
+
+
+
+[[console_windows]]
+=== Console on Windows
+
+
+==== Required Software
+
+Setting up a USB Serial Port connection in Windows
+
+. {install_win_driver}
+
+. Download and install PuTTY (http://www.putty.org/)
+
+
+
+==== Connection
+
+- {connect_calc}
+
+- {enable_serial_console}
+
+- <<find_serport_win,Find the Serial Port Name>>
+
+- Start PuTTY, go to Session `[1]` and select Serial in the
+panel on the right; go to Connection `[2]` -> Serial `[3]`
+and configure the serial line with the following values:
+• Serial line to connect to : Serial Port Name found in previous step
+• Speed : 38400
+• Data bits : 8
+• Stop bits : 1
+• Parity : None
+• Flow control : XON/XOFF (or none)
++
+image::putty_conf.jpg[]
+
+- {open_serial_monitor}
+
+- {serial_console_activated}
+
+- {exit_console_mode}
+
+
+[[console_MacOS]]
+=== Console on MacOS
+
+
+==== Required Software
+
+
+- Ensure the <<driver_MacOS,serial driver>> is installed.
+
+- The `screen` utility is preinstalled on MacOS system.
+
+
+==== Connection
+
+- {connect_calc}
+
+- {enable_serial_console}
+
+- <<find_serport_MacOS,Find the Serial Port Name>>
+
+
+- Open the Terminal application (Applications->Utilities->Terminal)
+
+
+- Start a console session in terminal application:
++
+----
+screen <serial_port> 38400,8,n,1
+----
++
+replace `<serial_port>` with serial port name found in previous step
++
+Example:
++
+----
+screen /dev/tty.usbserial-0001 38400,8,n,1
+----
+
+
+- {serial_console_activated}
+
+- {exit_console_mode}
+
+- End the console session: press btn:[CONTROL] + btn:[a] then btn:[k] then btn:[y]
+
+- Disconnect the calculator
+
+- Close the Terminal application
+
+
+
+
+[[console_linux]]
+=== Console on Linux
+
+
+==== Required Software
+
+- Install the `putty`.
++
+On Debian based systems run
++
+----
+sudo apt-get install putty
+----
++
+{pkg_inst_other_lnx}
+
+
+
+
+==== Connection
+
+- {connect_calc}
+
+-  <<find_serport_linux,Find the Serial Port Name>>
+
+- Start PuTTY
+
+- go to "Session" and select Serial in the panel on the right
+
+- go to Connection -> Serial
+   and configure the serial line using the following values. The rest should be left to default (check image below):
+  * Serial line to connect to: use Serial Port Name found in the previous step
+  * Speed : 38400
+  * No flow control
++
+image::putty_conf_lnx.png[]
+
+- {enable_serial_console}
+
+- {open_serial_monitor}
+
+- {serial_console_activated}
+
+- {exit_console_mode}
+
+// quick_serial_check
+//- You can quickly check the serial connection by pressing [ON] key on calculator several times
+//  it should display message like `DM15 turned on` each time the calculator is turned on.
+
+
+
+
+== Commands in Serial Console
+
+Once the <<serial_connection,serial connection>> to the calculator is established,
+calculator responds to switching to <<console_calc,Serial Console Mode>> with
+text:
+----
+<model> ready
+----
+where `<model>` is calculator model, e.g. for `DM15_M80` it writes to the serial console
+----
+DM15_M80 ready
+----
+
+This also indicates that the serial console is ready to accept commands.
+
+
+[[cmd_prompt]]
+As a response to `ENTER` in serial console window the calculator responds with
+*command prompt*, which is +
+`DM41>>` - for DM41 model, or +
+`VOYAGER >>` - for other models
+
+A command prompt is also displayed whenever the calculator finishes a
+command and is ready for the next one.
+
+If an invalid command is entered or `?` command is used, the calculator responds
+with firmware version and list of available commands, e.g. for `DM15_M80_V31`:
+----
+VOYAGER >> ?
+Firmware DM15_M80_V32
+
+?          Help
+p          Key press
+s          Dump memory
+l          Load memory
+ct         Console timeout
+bootloader Invoke Bootloader
+t          Get time
+ts         Set time
+td         Update time
+kb         Toggle keyboard output to console
+d          Toggle display output to console
+b          Read battery voltage
+
+Type '<command> ?' for params
+VOYAGER >>
+----
+
+
+Next chapters describe several important commands in more details.
+
+
+
+[[save_restore]]
+=== Save and Restore State
+
+Here _state_ refers to the complete contents of the calculator, i.e. stack, registers,
+programs, etc.
+
+
+*Saving calculator memory*
+
+- {prepare_sercon}
+
+- To dump contents of calculator memory, enter: +
+  `s`
+
+- The memory dump is displayed followed by <<cmd_prompt,command prompt>>
+
+- This dump can be copied, pasted and saved to a text file
+(including the short line at the top which describes the
+calculator model) to be later restored to the calculator
+
+
+*Restoring calculator memory*
+
+- {prepare_sercon}
+
+- Engage calculator Restore Mode by entering: +
+  `l` (lowercase «L»)
+
+- The command prompt changes to: +
+    `Waiting for data...`
+
+- Copy all characters from the memory dump, including the short
+  line at the top which describes the calculator model
+
+- Paste it in the monitor window
+
+- Monitor window outputs: +
+   `Read OK` +
+  and the <<cmd_prompt,command prompt>> is displayed
+
+- Calculator memory is now restored
+
+
+
+=== Set time and date
+
+
+*Getting calculator internal date and time*
+
+- {prepare_sercon}
+- In the serial monitor window, enter: +
+   `t`
+- The monitor window returns date, time and day of the
+  week in format: +
+   `YYYY-MM-DD HH:MM:SS DDD`
+
+*Setting date and time*
+
+- {prepare_sercon}
+- The command to set date and time is +
+  `ts <YYYYMMDD> <HHMMSS>`
++
+for instance for September 22nd of 2016, 6:30 PM,
+enter the following command: +
+`ts 20160922 183000`
+
+- Now, date and time are set
+
+
+
+
+
+
+
+== Calculator configuration
+
+Configuration parameters can be directly changed by using special key combinations.
+Because the different models of the Voyager Series have different button layouts and almost,
+but not quite, similar configuration possibilities, in this chapter keys are referenced by
+their row/column place, e.g. btn:[(2-3)] means the key in row 2 and column 3.
+
+:see_spec_keys: See <<spec_keys,Special Key Combinations>> for more details of how to invoke this function on a particular calculator model.
+{see_spec_keys}
+
+[[conf_cpu_speed]]
+=== CPU Speed
+
+Invocation: btn:[ON] + btn:[(1-9)]
+
+The calculator supports two CPU speeds:
+
+- Normal - CPU runs at 12MHz
+- Fast - CPU runs at 48MHz
+
+This key combination cycles through them.
+
+
+[[conf_lcd_conf]]
+=== LCD Contrast Configuration
+
+Invocation: btn:[ON] + btn:[(1-6)]
+
+This key combination starts LCD contrast configuration.
+
+LCD contrast configuration consists of two parameters:
+
+- param1: LCD brightness
+- param2: LCD voltage
+
+
+The LCD configuration:
+
+- is automatically left without any change after 10 seconds of inactivity.
+
+- can be left without configuration change at any time by btn:[ON] key
+
+- current configuration can be confirmed and saved by btn:[ENTER] key
+
+
+
+[[conf_lcd_reset]]
+=== LCD Contrast Reset
+
+Invocation: btn:[ON] + btn:[(2-6)]
+
+This key combination resets the LCD contrast configuration to the default values.
+
+
+[[conf_fonts]]
+=== Fonts
+
+Invocation: btn:[ON] + btn:[(1-7)]
+
+The models DM10, DM11, DM12, DM15 and DM16 include several font types.
+
+This key combination cycles through them.
+
+
+[[toggle_annunciator]]
+=== Annunciator Location
+
+Invocation: btn:[ON] + btn:[(2-2)]
+
+This key combination toggles between location for the Voyager annunciators, displayed either below the digits (default) or above the digits.
+
+
+[[spec_keys]]
+== Special Key Combinations
+
+The SwissMicros Voyager calculators have some special key combinations, some are the same as on the HP calculators, some are unique to SwissMicros calculators.
+
+
+
+Usage:
+
+. Turn off calculator
+. Press and hold one of the buttons listed below
+. Press and release btn:[ON] button
+. Release first button pressed
+
+
+
+:benchmark: Benchmark. Evaluate speed compared to original calculator
+
+:cpu_speed: <<conf_cpu_speed,Configure CPU speed>>. Toggle between 12MHz and 48MHz
+
+:system_info: System info. Firmware version, battery voltage, current frequency, etc.
+
+:cycle_fonts:  <<conf_fonts,Cycle through available fonts>>
+
+:reset_lcd_contr: <<conf_lcd_reset,Reset LCD contrast>> to default values.
+
+:change_lcd_contr: <<conf_lcd_conf,Change LCD contrast>>
+
+:toggle_annunciator: <<toggle_annunciator,Toggle annunciator position>>
+
+
+=== DM10
+
+.Key Function Table for DM10
+[options="header",cols="1,8",width="80%"]
+|=============================================
+|Key                        | Function description
+|btn:[{sqrt}x]              | Display time/date for 5 minutes
+|btn:[e^x^]                 | {benchmark}
+|btn:[{nbsp}%{nbsp}]        | Time/date adjustment. +
+                              Usage: Up btn:[{plus}], Down btn:[{minus}], Next btn:[{prod}], Prev btn:[{div}],
+                              btn:[ENTER] to Set, btn:[ON] to Cancel
+|btn:[10^x^]                | Switch to serial console (see <<serial_console,Serial Console>> for details)
+|btn:[1/x]                  | {system_info}
+|btn:[CHS]                  | {change_lcd_contr}.  Param1: up btn:[{plus}],  down btn:[{minus}],
+                                                   Param2: up btn:[Σ{plus}], down btn:[3]
+|btn:[EEX]                  | {reset_lcd_contr}
+|btn:[STO]                  | Adjust RTC decrement -1h
+|btn:[RCL]                  | Adjust RTC increment +1h
+|btn:[{nbsp}7{nbsp}]        | {cycle_fonts}
+|btn:[{nbsp}9{nbsp}]        | {cpu_speed}
+|btn:[{nbsp}÷{nbsp}]        | Keyboard self test
+|btn:[{nbsp}⨯{nbsp}]        | Self test
+|btn:[{nbsp}{minus}{nbsp}]  | Power reset
+|btn:[{nbsp}{plus}{nbsp}]   | Endless test
+|btn:[{nbsp}.{nbsp}]        | Toggle decimal delimiter
+|btn:[{nbsp}GTO{nbsp}]        | {toggle_annunciator}
+|=============================================
+
+
+
+
+=== DM11
+
+.Key Function Table for DM11
+[options="header",cols="1,8",width="80%"]
+|=============================================
+|Key                        | Function description
+|btn:[{nbsp}A{nbsp}]        | Display time/date for 5 minutes
+|btn:[{nbsp}B{nbsp}]        | {benchmark}
+|btn:[{nbsp}C{nbsp}]        | Switch to serial console (see <<serial_console,Serial Console>> for details)
+|btn:[{nbsp}E{nbsp}]        | {system_info}
+|btn:[CHS]                  | {change_lcd_contr}. Param1: up btn:[{plus}], down btn:[{minus}],
+                                                  Param2: up btn:[Σ{plus}], down btn:[3]
+|btn:[EEX]                  | {reset_lcd_contr}
+|btn:[STO]                  | Adjust RTC decrement -1h
+|btn:[RCL]                  | Adjust RTC increment +1h
+|btn:[{nbsp}7{nbsp}]        | {cycle_fonts}
+|btn:[{nbsp}9{nbsp}]        | {cpu_speed}
+|btn:[{nbsp}÷{nbsp}]        | Keyboard self test
+|btn:[{nbsp}⨯{nbsp}]        | Self test
+|btn:[{nbsp}{minus}{nbsp}]  | Power reset
+|btn:[{nbsp}{plus}{nbsp}]   | Endless test
+|btn:[{nbsp}.{nbsp}]        | Toggle decimal delimiter
+|btn:[SST]                  | Time/date adjustment. +
+                              Usage: Up btn:[{plus}], Down btn:[{minus}], Next btn:[{prod}], Prev btn:[{div}],
+                              btn:[ENTER] to Set, btn:[ON] to Cancel
+|btn:[{nbsp}GTO{nbsp}]      | {toggle_annunciator}
+|=============================================
+
+
+
+
+=== DM12
+
+.Key Function Table for DM12
+[options="header",cols="1,8",width="80%"]
+|=============================================
+|Key                        | Function description
+|btn:[{nbsp}n{nbsp}]        | Display time/date for 5 minutes
+|btn:[{nbsp}i{nbsp}]        | {benchmark}
+|btn:[PV]                   | Switch to serial console (see <<serial_console,Serial Console>> for details)
+|btn:[FV]                   | {system_info}
+|btn:[CHS]                  | {change_lcd_contr}. Param1: up btn:[{plus}], down btn:[{minus}],
+                                                  Param2: up btn:[CHS], down btn:[3]
+|btn:[EEX]                  | {reset_lcd_contr}
+|btn:[STO]                  | Adjust RTC decrement -1h
+|btn:[RCL]                  | Adjust RTC increment +1h
+|btn:[{nbsp}7{nbsp}]        | {cycle_fonts}
+|btn:[{nbsp}9{nbsp}]        | {cpu_speed}
+|btn:[{nbsp}÷{nbsp}]        | Keyboard self test
+|btn:[{nbsp}⨯{nbsp}]        | Self test
+|btn:[{nbsp}{minus}{nbsp}]  | Power reset
+|btn:[{nbsp}{plus}{nbsp}]   | Endless test
+|btn:[{nbsp}.{nbsp}]        | Toggle decimal delimiter
+|btn:[{nbsp}y^x^{nbsp}]     | Time/date adjustment. +
+                              Usage: Up btn:[{plus}], Down btn:[{minus}], Next btn:[{prod}], Prev btn:[{div}],
+                              btn:[ENTER] to Set, btn:[ON] to Cancel
+|btn:[{nbsp}1/x{nbsp}]      | {toggle_annunciator}
+|=============================================
+
+
+
+=== DM15
+
+
+
+.Key Function Table for DM15
+[options="header",cols="1,8",width="80%"]
+|=============================================
+|Key                        | Function description
+|btn:[{nbsp}A{nbsp}]        | Display time/date for 5 minutes
+|btn:[{nbsp}B{nbsp}]        | {benchmark}
+|btn:[{nbsp}C{nbsp}]        | Switch to serial console (see <<serial_console,Serial Console>> for details)
+|btn:[{nbsp}E{nbsp}]        | {system_info}
+|btn:[CHS]                  | {change_lcd_contr}. Param1: up btn:[{plus}], down btn:[{minus}],
+                                                  Param2: up btn:[Σ{plus}], down btn:[3]
+|btn:[EEX]                  | {reset_lcd_contr}
+|btn:[STO]                  | Adjust RTC: decrement -1h
+|btn:[RCL]                  | Adjust RTC: increment +1h
+|btn:[{nbsp}7{nbsp}]        | {cycle_fonts}
+|btn:[{nbsp}9{nbsp}]        | {cpu_speed}
+|btn:[{nbsp}{div}{nbsp}]    | Keyboard self test
+|btn:[{nbsp}{prod}{nbsp}]   | Self test
+|btn:[{nbsp}{minus}{nbsp}]  | Power reset
+|btn:[{nbsp}{plus}{nbsp}]   | Endless test
+|btn:[{nbsp}.{nbsp}]        | Toggle decimal delimiter
+|btn:[SST]                  | Time/date adjustment. +
+                              Usage: Up btn:[{plus}], Down btn:[{minus}], Next btn:[{prod}], Prev btn:[{div}],
+                              btn:[ENTER] to Set, btn:[ON] to Cancel
+|btn:[{nbsp}GTO{nbsp}]      | {toggle_annunciator}
+|=============================================
+
+
+
+=== DM16
+
+.Key Function Table for DM16
+[options="header",cols="1,8",width="80%"]
+|=============================================
+|Key                        | Function description
+|btn:[{nbsp}A{nbsp}]        | Display time/date for 5 minutes
+|btn:[{nbsp}C{nbsp}]        | Switch to serial console (see <<serial_console,Serial Console>> for details)
+|btn:[{nbsp}E{nbsp}]        | {system_info}
+|btn:[{nbsp}F{nbsp}]        | {change_lcd_contr}. Param1: up btn:[{plus}], down btn:[{minus}],
+                                                  Param2: up btn:[CHS], down btn:[3]
+|btn:[BIN]                  | {reset_lcd_contr}
+|btn:[STO]                  | Adjust RTC decrement -1h
+|btn:[RCL]                  | Adjust RTC increment +1h
+|btn:[{nbsp}7{nbsp}]        | {cycle_fonts}
+|btn:[{nbsp}9{nbsp}]        | {cpu_speed}
+|btn:[{nbsp}÷{nbsp}]        | Keyboard self test
+|btn:[{nbsp}⨯{nbsp}]        | Self test
+|btn:[{nbsp}{minus}{nbsp}]  | Power reset
+|btn:[{nbsp}{plus}{nbsp}]   | Endless test
+|btn:[{nbsp}.{nbsp}]        | Toggle decimal delimiter
+|btn:[GSB]                  | Time/date adjustment. +
+                              Usage: Up btn:[{plus}], Down btn:[{minus}], Next btn:[{prod}], Prev btn:[{div}],
+                              btn:[ENTER] to Set, btn:[ON] to Cancel
+|btn:[{nbsp}GTO{nbsp}]      | {toggle_annunciator}
+|=============================================
+
+
+
+
+
+=== DM41
+
+.Key Function Table for DM41
+[options="header",cols="1,8",width="80%"]
+|=============================================
+|Key                   | Function description
+|btn:[{nbsp}A{nbsp}]   | Display time/date for 5 minutes
+|btn:[{nbsp}C{nbsp}]   | Switch to serial console (see <<serial_console,Serial Console>> for details)
+|btn:[{nbsp}E{nbsp}]   | {system_info}
+|btn:[CHS]             | {change_lcd_contr}. Param1: up btn:[R/S], down btn:[3],
+                                             Param2: up btn:[.], down btn:[2]
+|btn:[EEX]             | {reset_lcd_contr}
+|btn:[STO]             | Adjust RTC decrement -1h
+|btn:[RCL]             | Adjust RTC increment +1h
+|btn:[{nbsp}8{nbsp}]   | {cpu_speed}
+|btn:[{nbsp}9{nbsp}]   | Keyboard self test
+|btn:[x{gtlt}y]        | Time/date adjustment. +
+                         Usage: Up btn:[{plus}], Down btn:[{minus}], Next btn:[{prod}], Prev btn:[{div}],
+                         btn:[ENTER] to Set, btn:[ON] to Cancel
+|btn:[{nbsp}R↓{nbsp}]  | {toggle_annunciator}
+|=============================================
+
+
+[[illustrations]]
+== Illustrations
+
+=== Horizontal units size comparison
+
+image::http://tech.swissmicros.com/visual_assets/dia_hrz_sizes_800px.png["Horizontal units size comparison"]
+
+=== DM15
+
+image::http://tech.swissmicros.com/visual_assets/drw_dm15l_front_150.png["DM15L"]
+image::http://tech.swissmicros.com/visual_assets/drw_dm15l_back_150.png["DM15L back"]
+image::http://tech.swissmicros.com/visual_assets/drw_dm15_front_150.png["DM15"]
+
+=== DM16
+
+image::http://tech.swissmicros.com/visual_assets/drw_dm16l_front_150.png["DM16L"]
+image::http://tech.swissmicros.com/visual_assets/drw_dm16l_back_150.png["DM16L back"]
+image::http://tech.swissmicros.com/visual_assets/drw_dm16_front_150.png["DM16"]
+
+=== DM12
+
+image::http://tech.swissmicros.com/visual_assets/drw_dm12l_front_150.png["DM12L"]
+image::http://tech.swissmicros.com/visual_assets/drw_dm12l_back_150.png["DM12L back"]
+image::http://tech.swissmicros.com/visual_assets/drw_dm12_front_150.png["DM12"]
+
+=== DM11
+
+image::http://tech.swissmicros.com/visual_assets/drw_dm11l_front_150.png["DM11L"]
+image::http://tech.swissmicros.com/visual_assets/drw_dm11l_back_150.png["DM11L back"]
+image::http://tech.swissmicros.com/visual_assets/drw_dm11_front_150.png["DM11"]
+
+=== DM41
+
+image::http://tech.swissmicros.com/visual_assets/drw_dm41l_front_150.png["DM41L"]
+image::http://tech.swissmicros.com/visual_assets/drw_dm41l_back_150.png["DM41L back"]
+image::http://tech.swissmicros.com/visual_assets/drw_dm41_front_150.png["DM42"]
+
+
+[appendix]
+== SDK
+
+SwissMicros believes that the user should have full control over the hardware. SwissMicros provides an SDK to get developers started.
+
+The Voyager Series SDK can be downloaded from: link:https://technical.swissmicros.com/voyager/dm_lpc111x_sdk.tar.gz[dm_lpc111x_sdk.tar.gz].
+
+
+[appendix]
+[[extended_matrices]]
+== Matrices in Extended DM15
+
+// J.Fossy Weinzinger
+
+[caption='',title='Solving lin.eq and matrix inversions is limited to matrices with sizes up to 8x8, by J.Fossy Weinzinger']
+====
+The hp15c was a highlight of its time. It is noteworthy that the original nut code of hp15c is apparently fit for an extension of its RAM. As far as I can say, it work best for all but the inverse of a matrix larger than 8x8. The largest matrix the original hp15c could store was 8x8 - so the algorithm was optimized for that maximum in size.
+
+The reason why the original algorithm fail for larger matrices is that it has to reorder the rows of the matrix under certain circumstances. How the rows are reordered is stored in the signs of the diagonal elements of the matrix. In a register (7 bytes - 14 nibbles) the sign is stored in a nibble as 0 for + or 9 for -. A nibble hold 4 bits - so in the sign is place for additional 3 bits. These remaining 3 bits are used to store the original row offset. This only work up to 8 rows. If a matrix has more than 8 rows, this will not work anymore. :-(
+
+The intermediate step used for matrix division, matrix inverse and determinant of a matrix is called LU decomposition. It is described in the "HP15C advanced functions handbook" - Section 4 - "Using Matrix Operations" - "Understanding the LU Decomposition" on page 96/97 of the original manual from 1982 or on page 82/83 of the reproduction from 2012.
+
+Do not trust the results of matrix division, matrix inverse or determinant of a matrice larger than 8x8.
+
+An easy counter-example:
+
+----
+A(i,j) = 0 if j < (n - i + 1);
+Otherwise A(i,j) = 1
+
+b(i) = i
+1 <= i,j <= n
+
+A*x = b
+
+=>
+
+x(i) == 1 for all 1 <= i <= n
+
+ ----
+A * x = b
+
+0 0 0 0 ... 0 1 x(1) = 1
+0 0 0 0 ... 1 1 x(2) = 2
+...
+0 1 1 1 ... 1 1 x(n-1) = n-1
+1 1 1 1 ... 1 1 x(n) = n
+
+----
+
+The following program, also available as a dump, will fill pre-dimensioned matrix A, set size of b, fill b and set result matrix to C.
+
+.Matrix testing program
+----
+* f LBL D                001-42,21,14
+  RCL DIM A              002-45,23,11
+  STO 2                  003-   44  2
+  g TEST 6  x≠y?         004-43,30, 6
+  g RTN                  005-   43 32
+  f MATRIX 1  R0,R1 := 0 006-42,16, 1
+* f LBL 0                007-42,21, 0
+  RCL 2                  008-   45  2
+  RCL 0                  009-   45  0
+  -                      010-      30
+  1                      011-       1
+  +                      012-      40
+  RCL 1                  013-   45  1
+  g TEST 8  x<y?         014-43,30, 8
+  g CLx                  015-   43 45
+  g TEST 1  x>0?         016-43,30, 1
+  1                      017-       1
+  USER STO A / USER      018u   44 11
+  GTO 0                  019-   22  0
+  RCL 2                  020-   45  2
+  1                      021-       1
+  f DIM B                022-42,23,12
+  f MATRIX 1  R0,R1 := 0 023-42,16, 1
+* f LBL 1                024-42,21, 1
+  RCL 0                  025-   45  0
+  USER STO B / USER      026u   44 12
+  GTO 1                  027-   22  1
+  f RESULT C             028-42,26,13
+  g RTN                  029-   43 32
+----
+
+.DM15 dump of the matrix testing program
+----
+DM15_M1B
+00  00000000000000  00000000000000  00000000000000  00b10000000000
+04  000000fffff000  0000000000000c  00000000000008  c0b9ab9a000eae
+08  00000000000000  2fafcbefbe2280  00000000000040  00000000000000
+10  00000000000000  00000000000000  00000000000000  1a000000000000
+14  01017980433000  1b2d2d2d2d2d2d  000000000005fb  00000000000000
+18  00000000000000  0000000000007f  00000000c00000  00000000000000
+bc  00000000000000  01000000000001  00000000000000  00000000000000
+f8  00000000000000  00000000000000  00000000000000  0000b28c114bbf
+fc  300191ff9bf132  104abff171a278  31faf1fb303200  91ffb27642aa0d
+A: 000000fffff000  B: 000000fffffeae  C: c0b9ab9a000eae
+M: f000bffffff7fb  N: 00000000000000  G: 04
+----
+
+Then use it like this:
+
+----
+<n> ENTER f DIM A
+f D
+RCL MATRIX b
+RCL MATRIX A
+/
+f USER
+f MATRIX 1
+RCL C
+RCL C
+...
+f USER
+----
+
+To do the test:
+
+- Dimension A
+- Call D
+- Key in the calculation
+- Divide b by A
+- Check if all elements of C are equal to 1
+
+If 0<n<9 all elements of C will be equal to 1, but if n>8 the algorithm will fail and C will hold totally wrong values. Due to an overflow, the display will blink.
+
+
+Further investigations lead to the following results:
+
+- Mx 1x1 .. 8x8 give correct results.
+- Mx 9x9 .. 11x11 give wrong results.
+- Mx 12x12 .. 14x14 never end => endless loop
+====
+
+

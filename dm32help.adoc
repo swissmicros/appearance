@@ -1,0 +1,215 @@
+:allow-uri-read:
+:stylesheet: https://tech.swissmicros.com/User-Manuals/usermanuals.css
+:linkcss:
+:toc: left
+:toclevels: 5
+:lang: en
+
+:version: 0.98
+
+:title-page: DM32 Quick Reference Guide
+= DM32 Quick Reference Guide
+SwissMicros GmbH
+Copyright 2021-{localyear} v{version} {docdate}
+
+
+[[Top]]
+== DM32 Quick Reference Guide
+
+
+=== Navigation
+
+* Press [.button]#÷# to move one page backward
+* Press [.button]#×# to move one page forward
+* Press [.button]#-# to move one line backward
+* Press [.button]#+# to move one line forward
+* Press [.button]#▲# to select previous link
+* Press [.button]#▼# to select next link
+* Press [.button]#ENTER# to jump to selected link
+* Press [.button]#EXIT# or [.button]#F1# to exit
+* Press [.button]#F2# to jump to link:#Home[Contents]
+* Press [.button]#F3# to open help file selection dialog
+
+=== Numpad-like navigation keys
+
+* [.button]#2#/[.button]#8# - single line down/up
+* [.button]#3#/[.button]#9# - page down/up
+* [.button]#4#/[.button]#6# - prev/next link (same as arrows)
+* [.button]#5# - follow the link (same as [.button]#ENTER#)
+* [.button]#7# - go to the link:#Home[Contents] (same as [.button]#F2#)
+
+=== Symbols used in this guide
+
+* A [.lcd]#123# represents a soft button or anything on the LCD
+* A [.button]#STO# represents a physical button
+
+
+[[Home]]
+=== Contents
+
+* link:#F_Buttons[F-Buttons]
+* link:#Screenshot[Screenshot]
+* link:#Setup_Menu[Setup Menu]
+* link:#About[About]
+
+
+[[F_Buttons]]
+=== F-Buttons
+
+The top row consists of six unprinted buttons referenced as F-Buttons
+(F1-F6) or soft-menu buttons.
+
+* *F1* Displays this Help
+* *F2* Toggle the system soft menu visibility
+* *F3* (not assigned)
+* *F4* Increase buzzer volume
+* *Shift-F4* Decrease buzzer volume
+* *F5* Toggle stack alignment (Left, Right, Right Underlined)
+* *Shift-F5* Toggle between sans and HP font
+* *F6* Increase font size
+* *Shift-F6* Decrease font size
+
+Note that font changes using F5/F6 affect displaying of calculator stack
+and font in program mode and are stored independently for both stack and
+program mode.
+
+[[Screenshot]]
+=== Screenshot
+
+Pressing [.button]#SHIFT# and [.button]#DISP# simultaneously makes a
+screenshot and saves a BMP graphics file in the folder /SCREENS. +
+The file name is made up by the current date and time. +
+
+
+[[Setup_Menu]]
+=== Setup Menu
+
+* link:#File[File]
+* link:#Calculator_State[Calculator State]
+* link:#Print_To_File[Print_To_File]
+* link:#Settings[Settings]
+* link:#System[System]
+* link:#About[About]
+
+
+
+
+[[File]]
+==== Setup Menu → File
+
+Save and Load DM42 Programs to FAT Disk as *.raw files.
+
+* Load Program +
+Select RAW file and load in DM42 memory
+* Save Program +
+Select one or more DM42 programs from memory and save as one RAW file
+* Activate USB Disk +
+Prepare DM42 for connection with computer for file exchange
+* Show Disk Info +
+Display FAT Disk information
+
+
+[[Calculator_State]]
+==== Setup Menu → Calculator State
+
+The complete calculator state can be saved and loaded as one file
+(*.f42).
+
+* Load State +
+Load previously saved calculator state
+* Save State +
+Save current calculator state as a file
+* Load Clean State +
+Load default settings
+
+
+
+[[Print_To_File]]
+==== Setup Menu → Print To File
+
+* Graphics Print +
+Selecting this menu item enables printing to graphics file.
+* Text Print +
+Selecting this menu item enables printing to text file.
+* Graphics in Text +
+Selecting this menu item enables to see graphics in text file.
+* Don't print to IR +
+Selecting this menu item disables default printing to IR printer.
+
+[[Settings]]
+==== Setup Menu → Settings
+
+* Set Time +
+Set time and select 12h/24h format
+* Set Date +
+Set date and select MDY/DMY format
+* Status Bar +
+Display *State Filename* +
+Display *Day of Week* +
+Display *Date* +
+Select a *Date Separator* of . - / +
+Display *Month Shortcut* as 3 letter abrv. +
+Display *Time* +
+Display *Power Voltage in Header*
+* Stack Font Sizes +
+Allows to set font size ofsets for registers X, Y, Z, T, L and A
+* Beep Mute +
+Mute beep in all cases.
+* Slow Auto-repeat +
+This option makes auto-repeat of pressed and holded buttons slower.
+* Stack Layout +
+These are the options: +
+XYZTL +
+XYZTA +
+XYZL +
+XYZA +
+XY +
+LXYZT
+* Dynamic Stack Extension +
+This option enables or disables the 'Big Stack' extension of Free42
+
+
+
+[[System]]
+==== Setup Menu → System
+
+Warning: Certain actions in this menu can *destroy all stored data* of
+the calculator. +
+Please run 'Save Calculator State' in 'File' menu first to preserve data
+over potential RESET. +
+
+* Flashing firmware from FAT +
+Starts flashing of new firmware if firmware file is copied to root of
+FAT filesystem.
+* Bootloader +
+Connect USB to enter bootloader mode. Note that reset is the only way to
+exit bootloader mode.
+* Program Info +
+Displays info about currently loaded program
+* Reset to DMCP menu +
+Resets calculator and enters DMCP menu
+* Format FAT Disk +
+This will format FAT filesystem. All data will be erased!
+* FAT Disk Media Test +
+All data stored in the FAT disk will be destroyed by this low-level
+media test!
+* Power OFF mode +
+Allows to set power OFF mode. Only for diagnostics.
+* Self Test +
+Set of tests for KBD, LCD, IR, BEEP and Diagnostics
+
+
+
+
+[[About]]
+==== About
+
+* *DM Calculator Platform* +
+(C) 2014-2021, SwissMicros GmbH
+* *Free42* +
+(C) 2004-2021, Thomas Okken
+* *Intel Decimal Floating-Point Lib* +
+(C) 2007-2018, Intel Corp.
+* *DM42 Quick Reference Guide* +
+based on HP-42S Quick Reference Guide (c) Copyright 1988 Dex Smith
+
