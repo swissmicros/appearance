@@ -78,7 +78,7 @@ icons:
     {% if path | size  != depth %}
       {% if path[depth] != file.name %}
         {% assign dif = file.path | split: pwd %}
-        {% if dif[0] == '/' || depth == 1 %}
+        {% if dif[0] == '/' | depth == 1 %}
           {{ file.path | replace: file.name, '' }}
           {% if forloop.last == false %}::{% endif%}
         {% endif %}
