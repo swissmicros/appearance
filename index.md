@@ -1,14 +1,3 @@
----
-layout: page
-title: Technical Directory listing
-
-descriptions: 
-  - name: "README.md"
-    text: "This is a README file in markdown."
-  - name: "favicon.gif"
-    text: "<span style='color: red'>favicon appears in the browser tab</span>"
----
-
 # Default for all public repositories 
 
 This is index.md
