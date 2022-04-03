@@ -16,6 +16,12 @@ descriptions:
 
 This repository shares common files and folders responsible for the appearance of the SwissMicros website hosted on GitHub Pages.
 
+Add the two last lines to _config.yml in the root folder of your new repository
+```
+layouts_dir     : ./appearance/_layouts
+includes_dir     : ./appearance/_includes
+```
+
 Add this file to a repository for GitHub Pages:
 
 /.github/workflows/asciidoctor-ghpages.yml
