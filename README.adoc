@@ -13,6 +13,7 @@
 SwissMicros GmbH
 Copyright © 2016 – {localyear} • v{version} • {docdate}
 
+This is README.adoc
 
 == About this Repository
 
