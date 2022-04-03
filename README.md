@@ -1,7 +1,5 @@
 # Common files and folder for GitHub Pages appearance 
 
-This is index.md
-
 ## Clone this repository as a base for a new public repository.
 
 
