@@ -71,6 +71,8 @@ icons:
   </div>
 </div>
 
+{{ content }}
+
 {% assign rel_path= page.folder-text | default: page.url | replace: page.path, '' %}
 <h2>Directory {{ page.folder-text | default: page.url | replace: page.path, '' }}</h2>
 
@@ -78,9 +80,6 @@ icons:
 <h3>{{ page.url | replace: page.path, '' }}</h3>
 {% endif %}
 
-<div class="post-content">
-  {{ content }}
-</div>
 
 <!-- abs_url = {{ abs_url }}<br/> -->
 <!-- rel_url = {{ rel_url }}<br/> -->
