@@ -115,11 +115,9 @@ icons:
 
 {% for folder in top_folders %}
   {% assign desc = page.descriptions | where:"name", folder | first %}
-  {% assign hide = page.hide_folder | where:"name", folder | first %}
-  {% if hide.name == folder %}
+  {% assign hide = layout.hide_folder | where:"name", folder | first %}
+  {% if hide.name != folder %}
    <tr><td><a href="{{ folder }}"><i class="fa-solid fa-folder"></i></a></td><td><a href="{{ folder }}">{{ folder }}</a></td><td><a href="{{ folder }}">{{ desc.text }}</a></td></tr>
-  {% else %}
-   <tr><td>XXX</td><td><a href="{{ folder }}">{{ folder }}</a></td><td><a href="{{ folder }}">{{ desc.text }}</a></td></tr>
   {% endif %}      
 {% endfor %}
 
