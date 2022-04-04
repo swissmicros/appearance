@@ -55,7 +55,7 @@ icons:
 
 <div id="header">
   <div id="toc" class="toc2">
-    <div id="toctitle">Public Repositories</div>
+    <div id="toctitle">Repositories</div>
     <ul class="sectlevel1">
       <li><a href="{{ base_url }}User-Manuals">User-Manuals</a></li>
       {% for repository in site.github.public_repositories %}
@@ -64,11 +64,12 @@ icons:
     </ul> 
   </div>
 </div>
-
+<!-- 
 <h2>{{ page.folder-text | default: page.url | replace: page.path, '' }}</h2>
 {% if page.folder-text == '' %}
 <h3>{{ page.url | replace: page.path, '' }}</h3>
 {% endif %}
+ -->
 <div class="post-content">
   {{ content }}
 </div>
