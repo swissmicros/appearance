@@ -71,7 +71,9 @@ icons:
   </div>
 </div>
 
-{{ content }}
+<div class="post-content">
+  {{ content }}
+</div>
 
 {% assign rel_path= page.folder-text | default: page.url | replace: page.path, '' %}
 <h2>Directory {{ page.folder-text | default: page.url | replace: page.path, '' }}</h2>
