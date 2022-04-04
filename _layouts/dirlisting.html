@@ -1,7 +1,13 @@
 ---
 layout: default
 
-hidden_ext: 
+hide_folder: 
+  - name: "appearance"
+
+hide_file: 
+  - name: "hide-me.txt"
+
+hide_ext: 
   - name: ".adoc"
   - name: ".css"
   - name: ".md"
@@ -78,7 +84,7 @@ icons:
     {% if path | size  != depth %}
       {% if path[depth] != file.name %}
         {% assign dif = file.path | split: pwd %}
-        {% if dif[0] == '/' | depth == 1 %}
+        {% if dif[0] == '/' or depth == 1 %}
           {{ file.path | replace: file.name, '' }}
           {% if forloop.last == false %}::{% endif%}
         {% endif %}
@@ -108,10 +114,10 @@ icons:
 
 {% for folder in top_folders %}
   {% assign desc = page.descriptions | where:"name", folder | first %}
-  {% assign hide = page.hidden | where:"name", folder | first %}
-  {% unless hide.name == folder %}
+  {% assign hide = page.hide_folder | where:"name", folder | first %}
+  {% if hide.name == folder %}
    <tr><td><a href="{{ folder }}"><i class="fa-solid fa-folder"></i></a></td><td><a href="{{ folder }}">{{ folder }}</a></td><td><a href="{{ folder }}">{{ desc.text }}</a></td></tr>
-  {% endunless %}      
+  {% endif %}      
 {% endfor %}
 
 {% for file in site.static_files %}
@@ -119,16 +125,19 @@ icons:
   {% if path_s == depth %} 
     {% assign dif = file.path | split: pwd %}
     {% if dif[0] == '/' %}
-      {% assign ext = layout.hidden_ext | where:"name", file.extname | first %}
-      {% unless ext.name == file.extname %}
-        {% assign desc = page.descriptions | where:"name", file.name | first %}
-        {% assign hide = page.hidden | where:"name", file.name | first %}
-        {% unless hide.name == file.name %}
-          {% assign icon = layout.icons | where:"extname", file.extname | first %}
-          {% assign fa-icon = icon.icon | default: "fa-solid fa-file" %}
+      {% assign hide = layout.hide_ext | where:"name", file.extname | first %}
+      {% if hide.name != file.extname %}
+        {% assign hide = layout.hide_file | where:"name", file.name | first %}
+        {% if hide.name != file.name %}
+          {% assign desc = page.descriptions | where:"name", file.name | first %}
+          {% assign hide = page.hidden_file | where:"name", file.name | first %}
+          {% if hide.name != file.name %}
+            {% assign icon = layout.icons | where:"extname", file.extname | first %}
+            {% assign fa-icon = icon.icon | default: "fa-solid fa-file" %}
     <tr><td><a href="{{ file.name }}"><i class="{{ fa-icon }}"></i></a></td><td><a href="{{ file.name }}">{{ file.name }}</a></td><td><a href="{{ file.name }}">{{ desc.text }}</a></td></tr>
-        {% endunless %}      
-      {% endunless %}      
+          {% endif %}      
+        {% endif %}      
+      {% endif %}      
     {% endif %}
   {% endif %}
 {% endfor %}
