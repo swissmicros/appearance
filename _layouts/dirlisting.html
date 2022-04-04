@@ -2,6 +2,9 @@
 
 layout: default
 
+hide_repository: 
+  - name: "appearance"
+
 hide_folder: 
   - name: "appearance"
 
@@ -58,9 +61,12 @@ icons:
     <div id="toctitle">Repositories</div>
     <ul class="sectlevel1">
       <li><a href="{{ base_url }}User-Manuals">User-Manuals</a></li>
-      {% for repository in site.github.public_repositories %}
+    {% for repository in site.github.public_repositories %}
+      {% assign hide = layout.hide_repository | where:"name", folder | first %}
+      {% if hide.name != repository.name %}
       <li><a href="{{ base_url }}{{ repository.name | remove_first: '/' }}"> {{ repository.name | replace: '-', ' ' | replace: '_', ' ' }}</a></li>
-      {% endfor %}
+      {% endif %}
+    {% endfor %}
     </ul> 
   </div>
 </div>
