@@ -92,7 +92,6 @@ icons:
 {% capture folders_list %}
   {% for file in site.static_files %}
     {% assign path = file.path | split: '/' %}
-<!--     {% if path | size  != depth %} -->
     {% if path.size != depth %}
       {% if path[depth] != file.name %}
         {% assign dif = file.path | split: pwd %}
